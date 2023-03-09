@@ -5,14 +5,12 @@ export const Container = styled.View`
     background-color: ${theme.colors.background};
   `}
   flex: 1;
-  justify-content: center;
-  align-items: center;
 `;
 
-export const Title = styled.Text`
+export const Header = styled.View`
   ${({ theme }) => css`
-    color: ${theme.colors.title};
-    font-family: ${theme.fonts.bold};
+    background-color: ${theme.colors.primary};
   `}
-  font-size: 24px;
+
+  width: 100%;
 `;
