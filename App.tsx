@@ -9,7 +9,7 @@ import { DashBoard } from './src/pages/Dashboard';
 import * as SplashScreen from 'expo-splash-screen';
 
 export default function App() {
-  SplashScreen.preventAutoHideAsync();
+  // SplashScreen.preventAutoHideAsync();
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
