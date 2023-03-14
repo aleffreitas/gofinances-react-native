@@ -6,7 +6,8 @@ type CategoryProps = {
   icon: string;
 }
 
-type DataProps = {
+export type DataTransactionCardProps = {
+  type: 'positive' | 'negative'
   title: string;
   amount: string;
   category: CategoryProps;
@@ -14,14 +15,17 @@ type DataProps = {
 }
 
 type TransactionCardProps = {
-  data: DataProps;
+  data: DataTransactionCardProps;
 }
 
 export function TransactionCard({ data }: TransactionCardProps){
   return(
     <Container>
       <Title>{data?.title}</Title>
-      <Amount>{data?.amount}</Amount>
+      <Amount type={data?.type}>
+        {data?.type === 'negative' && '- '}
+        {data?.amount}
+      </Amount>
 
       <Footer>
         <Category>
