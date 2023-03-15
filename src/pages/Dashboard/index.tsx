@@ -75,11 +75,11 @@ export function DashBoard(){
           lastTransaction='Última entrada dia 03 de abril'
         />
         <HighlightCard
-        title='Total'
-        amount='R$ 16.141,00'
-        type='total'
-        lastTransaction='01 à 16 de abril'
-      />
+          title='Total'
+          amount='R$ 16.141,00'
+          type='total'
+          lastTransaction='01 à 16 de abril'
+        />
       </HighlightCards>
 
       <Transactions>
