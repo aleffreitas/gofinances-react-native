@@ -8,6 +8,7 @@ import theme from './src/global/styles/theme';
 import { DashBoard } from './src/pages/Dashboard';
 import { Register } from './src/pages/Register';
 import * as SplashScreen from 'expo-splash-screen';
+import { CategorySelect } from './src/pages/CategorySelect';
 
 export default function App() {
   // SplashScreen.preventAutoHideAsync();
@@ -25,7 +26,8 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       {/* <DashBoard /> */}
-      <Register />
+      {/* <Register /> */}
+      <CategorySelect />
     </ThemeProvider>
   );
 }
