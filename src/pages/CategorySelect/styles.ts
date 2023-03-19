@@ -2,6 +2,10 @@ import styled, { css } from "styled-components/native";
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from "react-native-responsive-fontsize";
 
+type CategoryProps = {
+  isActive: boolean;
+};
+
 export const Container = styled.View`
   ${({ theme }) => css`
     background-color: ${theme.colors.background};
@@ -28,7 +32,10 @@ export const Title = styled.Text`
   font-size: ${RFValue(18)}px;
 `;
 
-export const Category = styled.View`
+export const Category = styled.TouchableOpacity<CategoryProps>`
+  ${({ theme, isActive }) => css`
+    background-color: ${isActive ? theme.colors.secondaryLight : theme.colors.background};
+  `}
   width: 100%;
   padding: ${RFValue(15)}px;
   flex-direction: row;
