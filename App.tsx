@@ -9,6 +9,8 @@ import { DashBoard } from './src/pages/Dashboard';
 import { Register } from './src/pages/Register';
 import * as SplashScreen from 'expo-splash-screen';
 import { CategorySelect } from './src/pages/CategorySelect';
+import { NavigationContainer } from '@react-navigation/native';
+import { AppRoutes } from './src/routes/app.routes';
 
 export default function App() {
   // SplashScreen.preventAutoHideAsync();
@@ -25,9 +27,9 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <DashBoard /> */}
-      <Register />
-      {/* <CategorySelect /> */}
+      <NavigationContainer>
+        <AppRoutes />
+      </NavigationContainer>
     </ThemeProvider>
   );
 }
