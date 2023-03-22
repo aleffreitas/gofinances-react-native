@@ -4,11 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins';
 
 import theme from './src/global/styles/theme';
-
-import { DashBoard } from './src/pages/Dashboard';
-import { Register } from './src/pages/Register';
 import * as SplashScreen from 'expo-splash-screen';
-import { CategorySelect } from './src/pages/CategorySelect';
 import { NavigationContainer } from '@react-navigation/native';
 import { AppRoutes } from './src/routes/app.routes';
 
