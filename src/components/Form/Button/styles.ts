@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { RectButton } from "react-native-gesture-handler";
 
-export const ActionButton = styled(TouchableOpacity)`
+export const ActionButton = styled(RectButton)`
   ${({ theme }) => css`
     background-color: ${theme.colors.secondary};
   `}

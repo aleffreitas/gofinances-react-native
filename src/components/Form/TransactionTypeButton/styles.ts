@@ -1,33 +1,41 @@
 import styled, { css } from "styled-components/native";
 import { Feather } from '@expo/vector-icons';
-import { TouchableOpacity } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 
 type IconProps = {
   type: 'income' | 'outcome';
 };
 
-type ButtonProps = {
+type ContainerProps = {
   type: 'income' | 'outcome';
   isActive: boolean;
 };
 
-export const Button = styled(TouchableOpacity)<ButtonProps>`
+export const Container = styled(GestureHandlerRootView)`
+  flex: 1;
+`;
+
+export const Content = styled.View<ContainerProps>`
   ${({ theme, isActive }) => css`
-    border: ${isActive ? 'none' : `1.5px solid ${theme.colors.text}`};
+  border: ${isActive ? 'none' : `1.5px solid ${theme.colors.text}`};
   `}
   ${({ theme, isActive, type }) => isActive && type === 'income' && css`
-    background-color: ${theme.colors.successLight};
+  background-color: ${theme.colors.successLight};
   `}
   ${({ theme, isActive, type }) => isActive && type === 'outcome' && css`
-    background-color: ${theme.colors.attentionLight};
+  background-color: ${theme.colors.attentionLight};
   `}
-  width: 48%;
+  width: 98%;
+  border-radius: 5px;
+`;
+
+export const Button = styled(RectButton)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
   padding: 16px;
+  width: 100%;
 `;
 
 export const Icon = styled(Feather)<IconProps>`
