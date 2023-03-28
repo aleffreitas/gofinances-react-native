@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import uuid from 'react-native-uuid';
 import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from "react-native";
 import { Button } from "../../components/Form/Button";
 import { CategorySelectButton } from "../../components/Form/CategorySelectButton";
@@ -10,14 +11,19 @@ import { TransactionTypeButton } from "../../components/Form/TransactionTypeButt
 import { CategorySelect } from "../CategorySelect";
 import { Container, Fields, Form, Header, Title, TransactionsType } from "./styles";
 import { schema } from "../../components/Form/InputForm/validations";
+import { useNavigation } from "@react-navigation/native";
+import { AppRoutesParamList } from "../../routes/app.routes";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
 interface FormDataProps {
   name: string;
   amount: number;
 }
 
+type RegisterNavigationProps = BottomTabNavigationProp<AppRoutesParamList>;
+
 export function Register(){
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const { control, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
   const [transactionType, setTransactionType] = useState('');
@@ -26,7 +32,9 @@ export function Register(){
     key: 'category',
     name: 'Categoria'
   });
+
   const dataKey = '@gofinances:transactions';
+  const navigation = useNavigation<RegisterNavigationProps>();
 
   function handleTransactionsTypeSelect(type: 'income' | 'outcome'){
     setTransactionType(type);
@@ -40,6 +48,15 @@ export function Register(){
     setCategoryModalOpen(true);
   }
 
+  function resetInsertData(){
+    reset();
+    setTransactionType('');
+    setCategory({
+      key: 'category',
+      name: 'Categoria'
+    })
+  }
+
   async function handleRegister(form: FormDataProps){
 
     if(!transactionType){
@@ -51,10 +68,12 @@ export function Register(){
     }
 
     const newTransaction = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       transactionType,
-      category: category.key
+      category: category.key,
+      date: new Date()
     }
     
     try {
@@ -67,6 +86,10 @@ export function Register(){
       ];
 
       await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormated)); 
+
+      resetInsertData();
+
+      navigation.navigate("Listagem");
 
     } catch (err) {
       console.log(err);

@@ -6,8 +6,14 @@ import { Register } from "../pages/Register";
 import { useTheme } from "styled-components/native";
 import { Platform } from "react-native";
 
+export type AppRoutesParamList = {
+  Listagem: undefined,
+  Cadastrar: undefined,
+  Resumo: undefined,
+};
 
-const { Navigator, Screen } = createBottomTabNavigator();
+const { Navigator, Screen } = createBottomTabNavigator<AppRoutesParamList>();
+
 
 export function AppRoutes(){
   const theme = useTheme();
