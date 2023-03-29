@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { HighlightCard } from '../../components/HighlightCard';
@@ -6,6 +6,7 @@ import { HighlightCard } from '../../components/HighlightCard';
 import { DataTransactionCardProps, TransactionCard } from '../../components/TransactionCard';
 
 import { Container, Header, HighlightCards, Icon, LogoutButton, Photo, Title, TransactionList, Transactions, User, UserGreeting, UserInfo, UserName, UserWrapper } from './styles';
+import { useFocusEffect } from '@react-navigation/native';
 
 export interface DataListProps extends DataTransactionCardProps {
   id: string;
@@ -49,7 +50,12 @@ export function DashBoard(){
 
   useEffect(() => {
     loadTransactions();
+  },[]);
+
+  useFocusEffect(useCallback(() => {
+    loadTransactions();
   },[])
+  );
 
   return(
     <Container>
