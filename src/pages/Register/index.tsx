@@ -71,7 +71,7 @@ export function Register(){
       id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
-      transactionType,
+      type: transactionType,
       category: category.key,
       date: new Date()
     }
@@ -100,7 +100,7 @@ export function Register(){
   useEffect(() => {
     async function loadData(){
       const data = await AsyncStorage.getItem(dataKey);
-      console.log(JSON.parse(data!));
+      // console.log(JSON.parse(data!));
     }
 
     loadData();
