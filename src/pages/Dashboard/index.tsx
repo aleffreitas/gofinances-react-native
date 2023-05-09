@@ -12,8 +12,18 @@ export interface DataListProps extends DataTransactionCardProps {
   id: string;
 }
 
+interface HighlightProps {
+  amount: string;
+}
+
+interface HighLightDataProps {
+  entries: HighlightProps;
+  expensives: HighlightProps;
+}
+
 export function DashBoard(){
   const [data, setData] = useState<DataListProps[]>([]);
+  const [highLightData, setHighLightData] = useState<HighLightDataProps>({} as HighLightDataProps);
 
   const dataKey = '@gofinances:transactions';
 
