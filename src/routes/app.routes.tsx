@@ -5,6 +5,7 @@ import { DashBoard } from "../pages/Dashboard";
 import { Register } from "../pages/Register";
 import { useTheme } from "styled-components/native";
 import { Platform } from "react-native";
+import { Resume } from "../pages/Resume";
 
 export type AppRoutesParamList = {
   Listagem: undefined,
@@ -59,7 +60,7 @@ export function AppRoutes(){
       />
       <Screen
         name="Resumo"
-        component={Register}
+        component={Resume}
         options={{
           tabBarIcon: (({ size, color}) =>
             <MaterialIcons
