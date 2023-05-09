@@ -18,7 +18,8 @@ interface HighlightProps {
 
 interface HighLightDataProps {
   entries: HighlightProps;
-  expensives: HighlightProps;
+  expensive: HighlightProps;
+  total: HighlightProps;
 }
 
 export function DashBoard(){
@@ -31,8 +32,17 @@ export function DashBoard(){
     const response = await AsyncStorage.getItem(dataKey);
     const transactions = response ? JSON.parse(response) : [];
 
+    let entriesTotal = 0;
+    let expensiveTotal = 0;
+
     const transactionFormatted: DataListProps[] = transactions
     .map((item: DataListProps) => {
+
+      if(item.type === 'income'){
+        entriesTotal += Number(item.amount);
+      } else {
+        expensiveTotal += Number(item.amount);
+      }
 
       const amount = Number(item.amount).toLocaleString('pt-BR', {
         style: 'currency',
@@ -55,7 +65,29 @@ export function DashBoard(){
       }
     });
 
+    const total = entriesTotal - expensiveTotal;
+
     setData(transactionFormatted);
+    setHighLightData({
+      expensive: {
+        amount: expensiveTotal.toLocaleString('pt-BR',{
+          style: 'currency',
+          currency: 'BRL'
+        })
+      },
+      entries: {
+        amount: entriesTotal.toLocaleString('pt-BR',{
+          style: 'currency',
+          currency: 'BRL'
+        })
+      },
+      total: {
+        amount: total.toLocaleString('pt-BR',{
+          style: 'currency',
+          currency: 'BRL'
+        })
+      }
+    })
   }
 
   useEffect(() => {
@@ -89,19 +121,19 @@ export function DashBoard(){
       <HighlightCards>
         <HighlightCard
           title='Entradas'
-          amount='R$ 17.400,00'
+          amount={highLightData?.entries?.amount}
           type='down'
           lastTransaction='Última entrada dia 13 de abril'
         />
         <HighlightCard
           title='Saídas'
-          amount='R$ 1.259,00'
+          amount={highLightData?.expensive?.amount}
           type='up'
           lastTransaction='Última entrada dia 03 de abril'
         />
         <HighlightCard
           title='Total'
-          amount='R$ 16.141,00'
+          amount={highLightData?.total?.amount}
           type='total'
           lastTransaction='01 à 16 de abril'
         />
