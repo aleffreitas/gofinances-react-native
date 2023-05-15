@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { VictoryPie } from "victory-native";
 
 
 export const Container = styled.View`
@@ -34,3 +35,8 @@ export const Content = styled.ScrollView.attrs({
     padding: 24
   }
 })``;
+
+export const ChartContainer = styled.View`
+  width: 100%;
+  align-items: center;
+`;
