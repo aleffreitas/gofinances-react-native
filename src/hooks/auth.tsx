@@ -42,7 +42,7 @@ function AuthProvider({ children }: AuthProviderProps){
       const { type, params } = await AuthSession.startAsync({ authUrl }) as AuthorizationResponse;
       
       if(type === 'success') {
-        const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`);
+        const response = await fetch(`https://www.googleapis.com/oauth2/v2/userinfo?alt=json&access_token=${params.access_token}`);
         const userInfo = await response.json();
 
         setUser({
@@ -51,7 +51,7 @@ function AuthProvider({ children }: AuthProviderProps){
           name: userInfo.given_name,
           photo: userInfo.picture
         })
-      }     
+      }
 
     } catch(error){
       throw new Error();
