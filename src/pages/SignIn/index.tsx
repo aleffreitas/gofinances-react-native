@@ -7,12 +7,23 @@ import LogoIcon from '../../assets/logo.svg';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { SignInSocialButton } from '../../components/SignInSocialButton';
 import { useAuth } from '../../hooks/auth';
+import { Alert } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export function SignIn(){
 
-  const { user } = useAuth();
+  const { signInWithGoogle } = useAuth();
 
-  console.log(user);
+  async function handleSignInWithGoogle(){
+    try {
+      await signInWithGoogle();
+
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Não foi possível conectar a conta Google');
+    }
+  }
+
 
   return(
     <Container>
@@ -36,14 +47,17 @@ export function SignIn(){
 
       <Footer>
         <FooterWrapper>
-          <SignInSocialButton
-            title='Entrar com Google'
-            svg={GoogleIcon}
-          />
-          <SignInSocialButton
-            title='Entrar com Apple'
-            svg={AppleIcon}
-          />
+          <GestureHandlerRootView>
+            <SignInSocialButton
+              title='Entrar com Google'
+              svg={GoogleIcon}
+              onPress={handleSignInWithGoogle}
+            />
+            <SignInSocialButton
+              title='Entrar com Apple'
+              svg={AppleIcon}
+            />
+          </GestureHandlerRootView>
         </FooterWrapper>
       </Footer>
     </Container>
