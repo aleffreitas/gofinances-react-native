@@ -37,7 +37,7 @@ export function DashBoard(){
   const [highLightData, setHighLightData] = useState<HighLightDataProps>({} as HighLightDataProps);
   const { signOut, user } = useAuth();
 
-  const dataKey = '@gofinances:transactions';
+  const dataKey = `@gofinances:transactions_user:${user.id}`;
 
   function getLastTransactionDate({ collection, type }: GetLastTransactionDateProps){
     const lastTransaction = new Date(

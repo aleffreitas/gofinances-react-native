@@ -13,6 +13,7 @@ import { ptBR } from 'date-fns/locale';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ActivityIndicator } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { useAuth } from '../../hooks/auth';
 
 interface TransactionData {
   type: 'income' | 'outcome'
@@ -35,9 +36,12 @@ export function Resume(){
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth();
 
   const theme = useTheme();
-  const dataKey = '@gofinances:transactions';
+
+  const dataKey = `@gofinances:transactions_user:${user.id}`;
+  
 
   function handleDateChange(action: 'next' | 'prev'){
     if(action === 'next'){

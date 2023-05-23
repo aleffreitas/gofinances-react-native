@@ -14,6 +14,7 @@ import { schema } from "../../components/Form/InputForm/validations";
 import { useNavigation } from "@react-navigation/native";
 import { AppRoutesParamList } from "../../routes/app.routes";
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { useAuth } from "../../hooks/auth";
 
 interface FormDataProps {
   name: string;
@@ -26,6 +27,7 @@ export function Register(){
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
+  const { user } = useAuth();
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [category, setCategory] = useState({
@@ -33,7 +35,7 @@ export function Register(){
     name: 'Categoria'
   });
 
-  const dataKey = '@gofinances:transactions';
+  const dataKey = `@gofinances:transactions_user:${user.id}`;
   const navigation = useNavigation<RegisterNavigationProps>();
 
   function handleTransactionsTypeSelect(type: 'income' | 'outcome'){
