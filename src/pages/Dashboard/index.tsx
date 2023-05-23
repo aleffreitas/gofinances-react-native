@@ -35,7 +35,7 @@ export function DashBoard(){
   const [data, setData] = useState<DataListProps[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [highLightData, setHighLightData] = useState<HighLightDataProps>({} as HighLightDataProps);
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
 
   const dataKey = '@gofinances:transactions';
 
@@ -146,10 +146,10 @@ export function DashBoard(){
           <Header>
             <UserWrapper>
               <UserInfo>
-                <Photo source={{ uri: 'https://avatars.githubusercontent.com/u/59258709?v=4'}}/>
+                <Photo source={{ uri: user.photo }}/>
                 <User>
                   <UserGreeting>Olá,</UserGreeting>
-                  <UserName>Alef</UserName>
+                  <UserName>{user.name}</UserName>
                 </User>
               </UserInfo>
               <GestureHandlerRootView>
