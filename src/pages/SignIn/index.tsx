@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ActivityIndicator, Alert, Platform } from 'react-native';
 import { Container, Footer, FooterWrapper, Header, SignInTitle, Title, TitleWrapper } from './styles';
 
 import AppleIcon from '../../assets/apple.svg';
@@ -7,7 +8,6 @@ import LogoIcon from '../../assets/logo.svg';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { SignInSocialButton } from '../../components/SignInSocialButton';
 import { useAuth } from '../../hooks/auth';
-import { ActivityIndicator, Alert } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useTheme } from 'styled-components';
 
@@ -70,11 +70,14 @@ export function SignIn(){
               svg={GoogleIcon}
               onPress={handleSignInWithGoogle}
             />
-            <SignInSocialButton
-              title='Entrar com Apple'
-              svg={AppleIcon}
-              onPress={handleSignInWithApple}
-            />
+
+            {Platform.OS === 'ios' &&(
+              <SignInSocialButton
+                title='Entrar com Apple'
+                svg={AppleIcon}
+                onPress={handleSignInWithApple}
+              />
+            )}
           </GestureHandlerRootView>
         </FooterWrapper>
 
