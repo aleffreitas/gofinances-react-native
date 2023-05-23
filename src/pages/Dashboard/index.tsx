@@ -9,6 +9,7 @@ import { Container, Header, HighlightCards, Icon, LoadContainer, LogoutButton, P
 import { useFocusEffect } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import theme from '../../global/styles/theme';
+import { useAuth } from '../../hooks/auth';
 
 export interface DataListProps extends DataTransactionCardProps {
   id: string;
@@ -34,6 +35,7 @@ export function DashBoard(){
   const [data, setData] = useState<DataListProps[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [highLightData, setHighLightData] = useState<HighLightDataProps>({} as HighLightDataProps);
+  const { signOut } = useAuth();
 
   const dataKey = '@gofinances:transactions';
 
@@ -151,7 +153,7 @@ export function DashBoard(){
                 </User>
               </UserInfo>
               <GestureHandlerRootView>
-                <LogoutButton onPress={() => {}}>
+                <LogoutButton onPress={signOut}>
                   <Icon name='power' />
                 </LogoutButton>
               </GestureHandlerRootView>

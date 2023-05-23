@@ -12,8 +12,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { AppRoutes } from './src/routes/app.routes';
 import { StatusBar } from 'react-native';
 import { SignIn } from './src/pages/SignIn';
-import { AuthProvider } from './src/hooks/auth';
+import { AuthProvider, useAuth } from './src/hooks/auth';
 import { Routes } from './src/routes';
+import AppLoading from 'expo-app-loading';
 
 export default function App() {
   // SplashScreen.preventAutoHideAsync();
@@ -24,8 +25,10 @@ export default function App() {
     Poppins_700Bold,
   });
 
-  if(!fontsLoaded){
-    return null;
+  const { userStorageLoading } = useAuth();
+
+  if(!fontsLoaded || userStorageLoading){
+    return <AppLoading />;
   }
 
   return (
