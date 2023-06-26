@@ -2,7 +2,16 @@ import styled, { css } from "styled-components/native";
 import { TextInput } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
-export const InputData = styled(TextInput)`
+interface InputDataProps {
+  active?: boolean;
+}
+
+export const InputData = styled(TextInput)<InputDataProps>`
+  ${({ theme, active }) => active && css`
+    border-width: 3px;
+    border-color: ${theme.colors.attention};
+  `};
+
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     font-size: ${RFValue(14)}px;
